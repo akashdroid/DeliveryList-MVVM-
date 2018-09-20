@@ -25,9 +25,7 @@ import com.airpay.airpaylendingapp.data.model.api.OpenSourceResponse;
 
 import io.reactivex.Single;
 
-/**
- * Created by amitshekhar on 07/07/17.
- */
+
 
 public interface ApiHelper {
 

@@ -27,9 +27,6 @@ import com.mindorks.placeholderview.SwipePlaceHolderView;
 
 import java.util.List;
 
-/**
- * Created by amitshekhar on 11/07/17.
- */
 
 public final class BindingUtils {
 

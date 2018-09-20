@@ -19,9 +19,7 @@ package com.airpay.airpaylendingapp.data.remote;
 
 import com.airpay.airpaylendingapp.BuildConfig;
 
-/**
- * Created by amitshekhar on 07/07/17.
- */
+
 
 public final class ApiEndPoint {
 

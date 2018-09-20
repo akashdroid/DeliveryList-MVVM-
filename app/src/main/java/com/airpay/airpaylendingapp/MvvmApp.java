@@ -39,10 +39,10 @@ public class MvvmApp extends Application implements HasActivityInjector {
 
         AppLogger.init();
 
-        AndroidNetworking.initialize(getApplicationContext());
+       /* AndroidNetworking.initialize(getApplicationContext());
         if (BuildConfig.DEBUG) {
             AndroidNetworking.enableLogging(HttpLoggingInterceptor.Level.BODY);
-        }
+        }*/
 
         CalligraphyConfig.initDefault(mCalligraphyConfig);
     }

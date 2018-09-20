@@ -18,9 +18,6 @@ package com.airpay.airpaylendingapp.data.local.prefs;
 
 
 
-/**
- * Created by amitshekhar on 07/07/17.
- */
 
 public class AppPreferencesHelper implements PreferencesHelper {
 
