@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.airpay.airpaylendingapp.ui.main.BlogEmptyItemViewModel" />
+    </data>
+
+
+
+    <LinearLayout
+        android:id="@+id/linearLayoutView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/app_bar_height1"
+        android:gravity="center"
+        android:visibility="@{viewModel.getSaleVisibility}"
+        android:orientation="vertical">
+
+<!--        android:visibility="@{viewModel.getSaleVisibility}"
+            android:visibility="@{viewMoodel.getisconnected ? View.VISIBLE : View.GONE}"
+                        android:visibility="@{viewMoodel.getisconnected ? View.GONE : View.VISIBLE}"
+
+
+-->
+        <ProgressBar
+            android:id="@+id/progressBar1"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            android:visibility="@{viewModel.getIserrorpaging ? View.GONE : View.VISIBLE}"
+            />
+
+        <!--
+                    android:visibility="@{BlogViewModel.getIserrorpaging ? View.VISIBLE : View.GONE}"
+
+-->
+
+        <TextView
+            style="@style/TextStyle.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/please_retry"
+            android:drawableStart="@drawable/ic_error_outline_black_24dp"
+            android:textColor="@color/red_dark"
+            android:visibility="@{viewModel.getIserrorpaging ? View.VISIBLE : View.GONE}"
+
+            />
+
+
+    </LinearLayout>
+
+
+
+</layout>

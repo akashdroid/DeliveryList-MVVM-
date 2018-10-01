@@ -5,13 +5,13 @@ apply plugin: 'com.android.application'
 //apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {
         applicationId "com.airpay.airpaylendingapp"
         minSdkVersion 21
 
 
-        targetSdkVersion 28
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -19,14 +19,14 @@ android {
     }
     buildTypes {
         debug {
-            buildConfigField("String", "BASE_URL", "")
-            buildConfigField("String", "API_KEY", "")
+            buildConfigField("String", "BASE_URL", "\"https://mock-api-mobile.dev.lalamove.com\"")
+            buildConfigField("String", "API_KEY", "\"ABCXYZ123TEST\"")
         }
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField("String", "BASE_URL", "")
-            buildConfigField("String", "API_KEY", "")
+            buildConfigField("String", "BASE_URL", "\"https://mock-api-mobile.dev.lalamove.com/deliveries\"")
+            buildConfigField("String", "API_KEY", "hjjjj")
         }
     }
     compileOptions {
@@ -36,6 +36,7 @@ android {
     dataBinding {
         enabled = true
     }
+    buildToolsVersion '27.0.3'
 }
 
 dependencies {
@@ -58,10 +59,16 @@ dependencies {
     // network
     implementation "com.amitshekhar.android:rx2-android-networking:$rootProject.rx2FastAndroidNetworking"
 
+    /*// Play Services libraries
+    implementation "com.google.android.gms:play-services-maps:$rootProject.playLibVersion"
+    implementation "com.google.android.gms:play-services-location:$rootProject.playLibVersion"
+    implementation "com.google.android.gms:play-services-places:$rootProject.playLibVersion"
+*/
+
     // database
-    implementation "android.arch.persistence.room:rxjava2:$rootProject.roomDatabase"
+    // implementation "android.arch.persistence.room:rxjava2:$rootProject.roomDatabase"
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
-    annotationProcessor "android.arch.persistence.room:compiler:$rootProject.roomDatabase"
+    // annotationProcessor "android.arch.persistence.room:compiler:$rootProject.roomDatabase"
 
     // font
     implementation "uk.co.chrisjenx:calligraphy:$rootProject.calligraphyVersion"
@@ -73,7 +80,9 @@ dependencies {
     implementation "com.google.code.gson:gson:$rootProject.gsonVersion"
 
     // debug database
-    debugImplementation "com.amitshekhar.android:debug-db:$rootProject.debugDBVersion"
+    implementation 'com.google.android.gms:play-services-maps:15.0.1'
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+   // debugImplementation "com.amitshekhar.android:debug-db:$rootProject.debugDBVersion"
 
     // dependency injection
     implementation "com.google.dagger:dagger:$rootProject.dagger2Version"
@@ -105,6 +114,12 @@ dependencies {
     // view model
     implementation "android.arch.lifecycle:extensions:$rootProject.lifecycle"
     annotationProcessor "android.arch.lifecycle:compiler:$rootProject.lifecycle"
+    androidTestCompile 'com.android.support.test.espresso:espresso-contrib:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude group: 'com.android.support', module: 'design'
+        exclude group: 'com.android.support', module: 'recyclerview-v7'
+    }
 }
 
 configurations.all {

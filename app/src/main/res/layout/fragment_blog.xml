@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.airpay.airpaylendingapp.ui.main.BlogViewModel" />
+
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:gravity="center"
+              android:orientation="vertical">
+
+              <android.support.v7.widget.Toolbar
+                  android:layout_width="match_parent"
+                  android:background="@color/red_dark"
+                  android:visibility="@{viewModel.getBlogObservableArrayList.size > 0 ? View.VISIBLE : View.GONE}"
+                  android:layout_height="wrap_content">
+                  <TextView
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="Delivery List"
+                      android:textColor="@color/white"
+                      android:textSize="@dimen/text_sizehead"/>
+              </android.support.v7.widget.Toolbar>
+              <android.support.v4.widget.SwipeRefreshLayout
+                  xmlns:app="http://schemas.android.com/apk/res-auto"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  app:refreshing="@{viewModel.getIsrefresh}"
+                  app:onRefreshListener="@{() -> viewModel.onRefresh()}">
+              <android.support.v7.widget.RecyclerView
+                  android:id="@+id/blogRecyclerView"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:layout_margin="10dp"
+                  android:visibility="@{viewModel.getIserror ? View.GONE : View.VISIBLE}"
+                  app:adapter="@{viewModel.blogObservableArrayList}"
+                  tools:listitem="@layout/item_blog_view" />
+              </android.support.v4.widget.SwipeRefreshLayout>
+
+          </LinearLayout>
+
+          <android.support.v4.widget.ContentLoadingProgressBar
+              android:id="@+id/address_looking_up"
+              style="?android:attr/progressBarStyleLarge"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_gravity="center"
+              android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:visibility="@{viewModel.getIserror ? View.VISIBLE : View.GONE}"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="@dimen/imagge"
+                android:layout_height="@dimen/imagge"
+                android:src="@drawable/ic_error_outline_black_24dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/about"
+                android:textColor="@color/red_dark"
+                android:textSize="@dimen/texterrorsize" />
+
+        </LinearLayout>
+    </FrameLayout>
+
+</layout>

@@ -1,17 +1,21 @@
 package com.airpay.airpaylendingapp.di.module;
 
 import android.app.Application;
-import android.arch.persistence.room.Room;
 import android.content.Context;
+import android.support.v7.widget.LinearLayoutManager;
 
 import com.airpay.airpaylendingapp.BuildConfig;
 import com.airpay.airpaylendingapp.R;
-import com.airpay.airpaylendingapp.data.local.prefs.AppPreferencesHelper;
+import com.airpay.airpaylendingapp.data.local.db.dao.DataManager;
 import com.airpay.airpaylendingapp.data.local.prefs.PreferencesHelper;
 import com.airpay.airpaylendingapp.data.remote.ApiHeader;
 import com.airpay.airpaylendingapp.data.remote.ApiHelper;
 import com.airpay.airpaylendingapp.data.remote.AppApiHelper;
+import com.airpay.airpaylendingapp.data.remote.AppDataManager;
 import com.airpay.airpaylendingapp.di.ApiInfo;
+import com.airpay.airpaylendingapp.di.PreferenceInfo;
+import com.airpay.airpaylendingapp.utils.AppConstants;
+import com.airpay.airpaylendingapp.utils.EndlessRecyclerViewScrollListener;
 import com.airpay.airpaylendingapp.utils.rx.AppSchedulerProvider;
 import com.airpay.airpaylendingapp.utils.rx.SchedulerProvider;
 import com.google.gson.Gson;
@@ -32,18 +36,23 @@ public class AppModule {
         return appApiHelper;
     }
 
+
+
     @Provides
     @ApiInfo
     String provideApiKey() {
         return BuildConfig.API_KEY;
     }
 
-   /* @Provides
+
+    @Provides
     @Singleton
-    AppDatabase provideAppDatabase(@DatabaseInfo String dbName, Context context) {
-        return Room.databaseBuilder(context, AppDatabase.class, dbName).fallbackToDestructiveMigration()
-                .build();
-    }*/
+    ApiHeader.ProtectedApiHeader provideProtectedApiHeader(@ApiInfo String apiKey) {
+        return new ApiHeader.ProtectedApiHeader(
+                apiKey);
+    }
+
+
 
     @Provides
     @Singleton
@@ -60,23 +69,14 @@ public class AppModule {
         return application;
     }
 
-   /* @Provides
+
+    @Provides
     @Singleton
     DataManager provideDataManager(AppDataManager appDataManager) {
         return appDataManager;
     }
 
-    @Provides
-    @DatabaseInfo
-    String provideDatabaseName() {
-        return AppConstants.DB_NAME;
-    }*/
 
-  /*  @Provides
-    @Singleton
-    DbHelper provideDbHelper(AppDbHelper appDbHelper) {
-        return appDbHelper;
-    }*/
 
     @Provides
     @Singleton
@@ -84,27 +84,12 @@ public class AppModule {
         return new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
     }
 
-   /* @Provides
+    @Provides
     @PreferenceInfo
     String providePreferenceName() {
         return AppConstants.PREF_NAME;
-    }*/
-
-    @Provides
-    @Singleton
-    PreferencesHelper providePreferencesHelper(AppPreferencesHelper appPreferencesHelper) {
-        return appPreferencesHelper;
     }
 
-  /*  @Provides
-    @Singleton
-    ApiHeader.ProtectedApiHeader provideProtectedApiHeader(@ApiInfo String apiKey,
-                                                           PreferencesHelper preferencesHelper) {
-        return new ApiHeader.ProtectedApiHeader(
-                apiKey,
-                preferencesHelper.getCurrentUserId(),
-                preferencesHelper.getAccessToken());
-    }*/
 
     @Provides
     SchedulerProvider provideSchedulerProvider() {

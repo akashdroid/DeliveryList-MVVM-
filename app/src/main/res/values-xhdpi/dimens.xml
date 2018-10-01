@@ -1,4 +1,9 @@
 <resources>
 	<dimen name="app_bar_height">135dp</dimen>
 	<dimen name="activity_vertical_margin">28.8dp</dimen>
+	<dimen name="text_sizehead">18.7dp</dimen>
+	<dimen name="padding_5">9dp</dimen>
+	<dimen name="imagge">82.5dp</dimen>
+	<dimen name="texterrorsize">37.5dp</dimen>
+	<dimen name="app_bar_height1">81dp</dimen>
 </resources>

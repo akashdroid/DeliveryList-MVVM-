@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.airpay.airpaylendingapp.ui.main.BlogItemViewModel" />
+
+    </data>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> viewModel.onItemClick()}"
+        android:onLongClick="@{() -> viewModel.onLongClick()}"
+        android:padding="20dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_margin="10dp"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/pro_pic"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="2dp"
+                app:load_image="@{viewModel.imageUrl}" />
+
+            <TextView
+                android:id="@+id/merchantname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_toEndOf="@+id/pro_pic"
+                android:text="@{viewModel.title}" />
+
+            <TextView
+                android:id="@+id/location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/merchantname"
+                android:layout_marginStart="15dp"
+                android:layout_toEndOf="@+id/pro_pic"
+                android:drawableStart="@drawable/ic_location_on_black_24dp"
+                android:text="@{viewModel.author}"
+                android:textColor="@color/blue_grey_light" />
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+</layout>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="G">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.airpay.airpaylendingapp.ui.googlemaps.MapsViewModel" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/my_toolbar"
+            app:elevation="5dp">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                style="@style/Toolbar"
+                app:subtitleTextColor="@color/white"
+                app:title="@string/details"
+                app:titleTextColor="@color/white" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/light_gray" />
+
+        </android.support.design.widget.AppBarLayout>
+
+        <fragment
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/my_toolbar"
+            tools:context=".ui.googlemaps.GoogleMapsActivity" >
+
+
+
+
+        </fragment>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/my_toolbar"
+            android:background="@color/head"
+            android:padding="10dp"
+            android:visibility="@{viewModel.getSaleVisibility(viewModel.getPosition)}"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="0.2"
+                android:src="@drawable/ic_add_white_24px"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/bg_design"
+                android:layout_weight="0.9"
+                android:text="@string/weather"
+                android:textColor="@color/black"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/background_lightish"
+            android:layout_alignParentBottom="true"
+            android:gravity="bottom"
+            android:padding="10dp"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/pro_pic"
+                android:layout_gravity="center"
+                app:load_image="@{viewModel.getImageUrl}"
+                android:layout_marginTop="2dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:id="@+id/merchantname"
+                android:text="@{viewModel.getTitle}"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/location"
+                android:drawableStart="@drawable/ic_location_on_black_24dp"
+                android:layout_gravity="center"
+                android:textColor="@color/blue_grey_light"
+                android:text="@{viewModel.getAuthor}"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</layout>

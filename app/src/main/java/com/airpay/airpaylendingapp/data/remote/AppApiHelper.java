@@ -9,6 +9,8 @@ import com.airpay.airpaylendingapp.data.model.api.LogoutResponse;
 import com.airpay.airpaylendingapp.data.model.api.OpenSourceResponse;
 import com.rx2androidnetworking.Rx2AndroidNetworking;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -66,12 +68,24 @@ public class AppApiHelper implements ApiHelper {
     }
 
     @Override
-    public Single<BlogResponse> getBlogApiCall() {
+    public Single<List<BlogResponse>> getBlogApiCall() {
         return Rx2AndroidNetworking.get(ApiEndPoint.ENDPOINT_BLOG)
-                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .addQueryParameter("offset","0")
+                .addQueryParameter("limit","20")
                 .build()
-                .getObjectSingle(BlogResponse.class);
+                .getObjectListSingle(BlogResponse.class);
     }
+
+    @Override
+    public Single<List<BlogResponse>> getBlogApiCallpage(String offset) {
+        return Rx2AndroidNetworking.get(ApiEndPoint.ENDPOINT_BLOG)
+                .addQueryParameter("offset",offset)
+                .addQueryParameter("limit","20")
+                .build()
+                .getObjectListSingle(BlogResponse.class);
+    }
+
+
 
     @Override
     public Single<OpenSourceResponse> getOpenSourceApiCall() {
