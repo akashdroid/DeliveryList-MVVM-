@@ -1,4 +1,4 @@
-This repository contains a detailed sample app that implements MVVM architecture using Dagger2, Room, RxJava, FastAndroidNetworking
+This repository contains a detailed sample app that implements MVVM architecture using Dagger2, GoogleMapsApi, RxJava, FastAndroidNetworking
 
 The app has following packages:
 1.data: It contains all the data accessing and manipulating components.
